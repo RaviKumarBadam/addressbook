@@ -1,0 +1,43 @@
+pipeline 
+{
+    agent 
+    {
+        label 'master'   
+    }
+          tools 
+          {
+              maven 'localMvn'
+              jdk 'localJDK'
+
+          }
+    stages 
+    {
+        stage ('checkout the code') {
+            steps  {
+                git branch: 'master', url: 'https://github.com/RaviKumarBadam/addressbook.git'
+            }
+        }
+        stage ('code compile') {
+            steps {
+                sh """
+                mvn compile
+                """
+            }    
+        }
+         stage ('JUnit test') {
+            steps {
+                sh """
+                mvn test
+                """
+            }    
+        }
+        stage ('packaging') {
+            steps {
+                sh """
+                mvn package
+                """
+            }  
+        }  
+    }
+
+}
