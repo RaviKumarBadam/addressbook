@@ -17,14 +17,25 @@ pipeline
                 git branch: 'master', url: 'https://github.com/RaviKumarBadam/addressbook.git'
             }
         }
+     stage ('Parallel block'){
+        parallel{
+        stage ('code validate') {
+            steps {
+                sh """
+                mvn test validate
+                """
+            }    
+        }
         stage ('code compile') {
             steps {
-            catchError (buildResult: 'SUCCESS', stageResult: 'Failure') {
+                catchError (buildResult: 'SUCCESS', stageResult: 'Failure') {
                 sh """
                 mvn compile
                 """
-            } 
+            }    
             }
+        }
+        }
         }
        stage ('test errorcatch') {
             steps {
