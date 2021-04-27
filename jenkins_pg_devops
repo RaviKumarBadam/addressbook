@@ -29,7 +29,7 @@ pipeline
        stage ('test errorcatch') {
             steps {
                 sh """
-                echo "demo
+                echo "demo"
                 """
             }  
         }  
