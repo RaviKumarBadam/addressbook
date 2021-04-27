@@ -19,10 +19,12 @@ pipeline
         }
         stage ('code compile') {
             steps {
+            catchError (buildResult: 'SUCCESS', stageResult: 'Failure') {
                 sh """
                 mvn compile
                 """
-            }    
+            } 
+            }
         }
          stage ('JUnit test') {
             steps {
