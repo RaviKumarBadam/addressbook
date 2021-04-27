@@ -26,13 +26,7 @@ pipeline
             } 
             }
         }
-         stage ('JUnit test') {
-            steps {
-                sh """
-                mvn test
-                """
-            }    
-        }
+   
         stage ('packaging') {
             steps {
                 sh """
