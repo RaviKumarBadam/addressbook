@@ -26,8 +26,14 @@ pipeline
             } 
             }
         }
-   
-        stage ('packaging') {
+       stage ('test errorcatch') {
+            steps {
+                sh """
+                echo "demo
+                """
+            }  
+        }  
+       stage ('packaging') {
             steps {
                 sh """
                 mvn package
